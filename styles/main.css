@@ -1,0 +1,566 @@
+/* 全局样式 */
+:root {
+    --primary-color: #e60012;
+    --background-start: #ff9a9e;
+    --background-end: #fad0c4;
+    --text-color: #721c24;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    min-height: 100vh;
+    color: var(--text-color);
+    background: #000;
+    position: relative;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 音乐播放器样式 */
+.music-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+}
+
+.music-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: rotate 4s linear infinite;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.music-toggle.paused {
+    animation-play-state: paused;
+    opacity: 0.7;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 开场动画样式 */
+.intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    color: white;
+    cursor: pointer;
+}
+
+.intro-text {
+    font-size: clamp(2rem, 10vw, 5rem);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 2s ease forwards;
+}
+
+.click-hint {
+    margin-top: 2rem;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    opacity: 0;
+    animation: pulse 2s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+}
+
+/* 主内容样式 */
+.main-content {
+    display: none;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.main-content.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease forwards;
+}
+
+.container {
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 90%;
+    max-width: 800px;
+    opacity: 0;
+    transform: translateY(20px);
+    position: relative;
+    border: 2px solid rgba(255, 0, 0, 0.1);
+}
+
+.container.show {
+    animation: fadeInUp 1s ease forwards;
+}
+
+.greeting {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    line-height: 1.6;
+    margin: 1rem 0;
+}
+
+.greeting p {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.greeting p.show {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.decoration {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.lantern {
+    animation: swing 2s infinite ease-in-out;
+    display: inline-block;
+}
+
+/* 动画关键帧 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes swing {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* 装饰样式 */
+.top-decoration, .bottom-decoration {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+/* 蛇的动画样式 */
+.snake {
+    display: inline-block;
+    transform-origin: center;
+}
+
+.snake-left {
+    animation: snakeWaveLeft 3s ease-in-out infinite;
+}
+
+.snake-right {
+    animation: snakeWaveRight 3s ease-in-out infinite;
+}
+
+.snake-dance {
+    animation: snakeDance 4s ease-in-out infinite;
+}
+
+/* 边角装饰 */
+.corner-decoration {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: rotate 6s linear infinite;
+}
+
+.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
+
+/* 新增动画关键帧 */
+@keyframes snakeWaveLeft {
+    0%, 100% {
+        transform: rotate(-15deg) translateX(-5px);
+    }
+    50% {
+        transform: rotate(15deg) translateX(5px);
+    }
+}
+
+@keyframes snakeWaveRight {
+    0%, 100% {
+        transform: rotate(15deg) translateX(5px);
+    }
+    50% {
+        transform: rotate(-15deg) translateX(-5px);
+    }
+}
+
+@keyframes snakeDance {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-5px) rotate(10deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-5px) rotate(-10deg);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 烟花按钮样式 */
+.firework-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ff4d4d, #ff1a1a);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.firework-button.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    animation: buttonFadeIn 0.5s ease forwards;
+}
+
+.firework-button:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+}
+
+.firework-button:active {
+    transform: translateX(-50%) translateY(0);
+}
+
+@keyframes buttonFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* 烟花动画容器 */
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.firework {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(30);
+        opacity: 0;
+    }
+}
+
+/* 移动端优化 */
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+        margin: 5px;
+        width: 95%;
+    }
+
+    .greeting p {
+        margin: 0.5rem 0;
+    }
+}
+
+@media (max-height: 600px) {
+    body {
+        padding: 0.5rem;
+    }
+    
+    .container {
+        padding: 1rem;
+    }
+}
+
+/* iPhone 13 Pro 适配 */
+@media screen and (device-width: 390px) and (device-height: 844px), 
+       screen and (max-width: 390px) {
+    .container {
+        padding: 1.2rem;
+        margin: 8px;
+        width: 95%;
+        max-width: 370px;
+    }
+
+    .greeting {
+        font-size: clamp(1rem, 3.5vw, 1.3rem);
+        line-height: 1.4;
+        margin: 0.8rem 0;
+    }
+
+    .decoration {
+        font-size: clamp(2rem, 6vw, 3rem);
+        margin: 0.8rem 0;
+        gap: 0.3rem;
+    }
+
+    .corner-decoration {
+        font-size: 1.2rem;
+    }
+
+    .top-left {
+        top: 8px;
+        left: 8px;
+    }
+
+    .top-right {
+        top: 8px;
+        right: 8px;
+    }
+
+    .bottom-left {
+        bottom: 8px;
+        left: 8px;
+    }
+
+    .bottom-right {
+        bottom: 8px;
+        right: 8px;
+    }
+
+    /* 音乐播放器按钮适配 */
+    .music-player {
+        top: 15px;
+        right: 15px;
+    }
+
+    .music-toggle {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    /* 烟花按钮适配 */
+    .firework-button {
+        bottom: 25px;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        border-radius: 20px;
+    }
+
+    /* 开场动画适配 */
+    .intro-text {
+        font-size: clamp(1.8rem, 8vw, 3rem);
+    }
+
+    .click-hint {
+        margin-top: 1.5rem;
+        font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+    }
+
+    /* 优化点击区域 */
+    .firework-button, 
+    .music-toggle {
+        touch-action: manipulation;
+    }
+
+    /* 防止弹性滚动 */
+    html, body {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: none;
+    }
+
+    /* 优化视觉层次 */
+    .container {
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+    }
+
+    /* 优化动画性能 */
+    .decoration span,
+    .corner-decoration,
+    .music-toggle {
+        will-change: transform;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    /* 开发者署名样式 */
+    .developer-signature {
+        bottom: 8px;
+        right: 12px;
+        font-size: 0.75rem;
+    }
+}
+
+/* 横屏适配 */
+@media screen and (device-width: 844px) and (device-height: 390px), 
+       screen and (max-height: 390px) {
+    .container {
+        padding: 1rem;
+        margin: 5px;
+        max-height: 350px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .greeting {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .decoration {
+        font-size: 2rem;
+        margin: 0.5rem 0;
+    }
+
+    .firework-button {
+        bottom: 15px;
+    }
+}
+
+/* 开发者署名样式 */
+.developer-signature {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
+    z-index: 1000;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+} 
