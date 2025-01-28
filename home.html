@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
+    <title>新年快乐 - 蛇年吉祥</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- 背景图片 -->
+    <div class="background-image"></div>
+
+    <!-- 烟花容器 -->
+    <div class="fireworks-container"></div>
+
+    <!-- 音乐播放器 -->
+    <div class="music-player">
+        <audio id="bgMusic" loop preload="auto">
+            <source src="assets/music/background.mp3" type="audio/mp3">
+        </audio>
+        <button id="musicToggle" class="music-toggle">🎵</button>
+    </div>
+
+    <!-- 开场动画 -->
+    <div class="intro">
+        <div class="intro-text"></div>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="main-content">
+        <div class="container">
+            <!-- 顶部装饰 -->
+            <div class="decoration top-decoration">
+                <span class="lantern">🏮</span>
+                <span class="snake snake-left">🐍</span>
+                <span>✨</span>
+                <span class="snake snake-right">🐍</span>
+                <span class="lantern">🏮</span>
+            </div>
+
+            <!-- 祝福语 -->
+            <div class="greeting">
+                <!-- 祝福语将通过JavaScript动态插入 -->
+            </div>
+
+            <!-- 底部装饰 -->
+            <div class="decoration bottom-decoration">
+                <span class="snake snake-dance">🐍</span>
+                <span>✨</span>
+                <span>🎋</span>
+                <span>✨</span>
+                <span class="snake snake-dance">🐍</span>
+            </div>
+
+            <!-- 边角装饰 -->
+            <div class="corner-decoration top-left">🌺</div>
+            <div class="corner-decoration top-right">🌺</div>
+            <div class="corner-decoration bottom-left">🌺</div>
+            <div class="corner-decoration bottom-right">🌺</div>
+        </div>
+    </div>
+
+    <!-- 烟花按钮 -->
+    <button class="firework-button">放烟花 🎆</button>
+
+    <!-- 开发者署名 -->
+    <div class="developer-signature">by wjc</div>
+
+    <!-- 脚本 -->
+    <script src="js/lib/fireworks.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // 初始化内容
+        document.querySelector('.intro-text').textContent = config.introText;
+        const greetingContainer = document.querySelector('.greeting');
+        config.greetings.forEach(text => {
+            const p = document.createElement('p');
+            p.textContent = text;
+            greetingContainer.appendChild(p);
+        });
+    </script>
+</body>
+</html> 
